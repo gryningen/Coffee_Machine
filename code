@@ -1,0 +1,103 @@
+name = ["water", "milk", "coffee beans", "disposable cups", "money"]
+
+nule = [400, 540, 120, 9, 550]
+first = [-250, 0, -16, -1, 4]
+second = [-350, -75, -20, -1, 7]
+third = [-200, -100, -12, -1, 6]
+li = [nule, first, second, third]
+
+action = ""
+li_new = []
+
+while action != "exit":
+    action = input("""
+Write action (buy, fill, take, remaining, exit):
+ """)
+    if action == "take":
+        print("I gave you $", nule[4])
+        li[0][4] -= li[0][4]
+
+    elif action == "buy":
+        sort = input("""
+What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:
+ """)
+        if sort == "1":
+
+            def check_1():
+                li_new.clear()
+                for i in range(len(nule)):
+                    li_new.append(li[0][i] + li[1][i])
+                if min(li_new) >= 0:
+                    return True
+                else:
+                    return False
+
+            if check_1() is True:
+                print("I have enough resources, making you a coffee!")
+                for i in range(5):
+                    li[0][i] += li[1][i]
+
+            elif check_1() is False:
+                print("Sorry, not enough", name[li_new.index(min(li_new))], "!")
+
+        if sort == "2":
+
+            def check_2():
+                li_new.clear()
+                for i in range(len(nule)):
+                    li_new.append(li[0][i] + li[2][i])
+                if min(li_new) >= 0:
+                    return True
+                else:
+                    return False
+
+
+            if check_2() is True:
+                print("I have enough resources, making you a coffee!")
+                for i in range(5):
+                    li[0][i] += li[2][i]
+
+            elif check_2() is False:
+                print("Sorry, not enough", name[li_new.index(min(li_new))], "!")
+
+        if sort == "3":
+            def check_3():
+                li_new.clear()
+                for i in range(len(nule)):
+                    li_new.append(li[0][i] + li[3][i])
+                if min(li_new) >= 0:
+                    return True
+                else:
+                    return False
+
+
+            if check_3() is True:
+                print("I have enough resources, making you a coffee!")
+                for i in range(5):
+                    li[0][i] += li[3][i]
+
+            elif check_3() is False:
+                print("Sorry, not enough", name[li_new.index(min(li_new))], "!")
+
+    elif action == "fill":
+        wa = int(input("""Write how many ml of water do you want to add: 
+"""))
+        mi = int(input("""Write how many ml of milk do you want to add: 
+"""))
+        cof = int(input("""Write how many grams of coffee beans do you want to add: 
+"""))
+        d_cu = int(input("""Write how many disposable cups of coffee do you want to add: 
+"""))
+        li[0][0] += wa
+        li[0][1] += mi
+        li[0][2] += cof
+        li[0][3] += d_cu
+
+    elif action == "remaining":
+        print("")
+        print("The coffee machine has:")
+        print(nule[0], "of water")
+        print(nule[1], "of milk")
+        print(nule[2], "of coffee beans")
+        print(nule[3], "of disposable cups")
+        print("$", nule[4], "of money")
